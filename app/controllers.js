@@ -5,6 +5,9 @@ module.exports = {
     console.log(LogModel);
   },
   handleLogs: async (req, res) => {
+    if (req.body.challenge) {
+      return res.send(req.body.challenge);
+    }
     const client = await mongodb.connect(
       process.env.DB_URI,
       { useNewUrlParser: true }
