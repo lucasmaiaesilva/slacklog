@@ -1,4 +1,6 @@
-const LogModel = {
+const Schema = require('mongoose').Schema;
+
+const LogModel = new Schema({
   token: String,
   team_id: String,
   api_app_id: String,
@@ -8,7 +10,7 @@ const LogModel = {
       id: String,
       team_id: String,
       name: String,
-      deleted: false,
+      deleted: Boolean,
       color: String,
       real_name: String,
       tz: String,
@@ -23,7 +25,7 @@ const LogModel = {
       is_bot: Boolean,
       is_app_user: Boolean,
       updated: Number,
-      presence: String
+      locale: String
     },
     cache_ts: Number,
     event_ts: String
@@ -32,8 +34,8 @@ const LogModel = {
   event_id: String,
   event_time: Number,
   authed_users: Array
-}
+});
 
 module.exports = {
-  LogModel  
+  LogModel 
 }; 

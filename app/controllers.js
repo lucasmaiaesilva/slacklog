@@ -1,18 +1,22 @@
-const mongoose = require('mongoose');
-const LogModel = require('./models').LogModel; 
-
+const mongodb = require('mongodb').MongoClient;
 module.exports = {
   showHome: (req, res) => {
     res.send('hello world!!!');
     console.log(LogModel);
   },
-  handleLogs: (req, res) => {
-    console.log('handling log data ...\n', req.body);
+  handleLogs: async (req, res) => {
+    const client = await mongodb.connect(
+      process.env.DB_URI,
+      { useNewUrlParser: true }
+    );
+
+    const db = client.db('logs');
+    console.log(db);
     const { type } = req.body.event;
-    const Logger = mongoose.model(type, LogModel);
-    const Log = new Logger(req.body);
-    Log.save()
-      .then(() => console.log('data succesfully inserted'));
-    res.send({ challenge: req.body.challenge });
+    await db.createCollection(type);
+    await db.collection(type).insertOne(req.body);
+    return client.close();
+    // console.log('type', type);
+    // const Log = new Logger(req.body);
   }
 };
