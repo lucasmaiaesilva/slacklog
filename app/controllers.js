@@ -25,15 +25,15 @@ module.exports = {
     }
     return client.close();
   },
-  getLogs: async (req, res) => {
+  getLogs: (req, res) => {
     const db = client.db('heroku_1lzmbqql');
     console.log(db);
     const types = ['user_change', 'team_join'];
     let objres;
     try {
       types.map(type => {
-        const results = await db.collection(type).find({});
-        objres.concat(results);
+        const results = db.collection(type).find({})
+          .then(() => objeres.concat(results));
       });
       res.json(objres);
     } catch(e) {
