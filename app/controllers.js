@@ -17,6 +17,8 @@ module.exports = {
     const { type } = req.body.event;
     await db.createCollection(type);
     await db.collection(type).insertOne(req.body);
+    console.log('req body', req.body);
+    res.send({ success: true });
     return client.close();
   }
 };
