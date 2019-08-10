@@ -2,7 +2,6 @@ const mongodb = require('mongodb').MongoClient;
 module.exports = {
   showHome: (req, res) => {
     res.send('hello world!!!');
-    console.log(LogModel);
   },
   handleLogs: async (req, res) => {
     if (req.body.challenge) {
@@ -19,7 +18,5 @@ module.exports = {
     await db.createCollection(type);
     await db.collection(type).insertOne(req.body);
     return client.close();
-    // console.log('type', type);
-    // const Log = new Logger(req.body);
   }
 };
