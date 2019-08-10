@@ -15,10 +15,14 @@ module.exports = {
     const db = client.db('heroku_1lzmbqql');
     console.log(db);
     const { type } = req.body.event;
-    await db.createCollection(type);
-    await db.collection(type).insertOne(req.body);
-    console.log('req body', req.body);
-    res.send({ success: true });
+    try {
+      await db.createCollection(type);
+      await db.collection(type).insertOne(req.body);
+      console.log('req body', req.body);
+      res.status(200).send({ success: true });
+    } catch(e) {
+      res.status(502).send({ error: e });
+    }
     return client.close();
   }
 };
