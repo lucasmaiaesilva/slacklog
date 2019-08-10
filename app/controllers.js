@@ -29,11 +29,11 @@ module.exports = {
     const db = client.db('heroku_1lzmbqql');
     console.log(db);
     const types = ['user_change', 'team_join'];
-    let objres;
+    let objres = [];
     try {
       types.map(type => {
         const results = db.collection(type).find({})
-          .then(() => objeres.concat(results));
+          .then((res) => objres.concat(res));
       });
       res.json(objres);
     } catch(e) {
