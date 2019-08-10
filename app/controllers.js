@@ -12,7 +12,7 @@ module.exports = {
       { useNewUrlParser: true }
     );
 
-    const db = client.db('logs');
+    const db = client.db('heroku_1lzmbqql');
     console.log(db);
     const { type } = req.body.event;
     await db.createCollection(type);
