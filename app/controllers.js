@@ -24,5 +24,21 @@ module.exports = {
       res.status(502).send({ error: e });
     }
     return client.close();
+  },
+  getLogs: async (req, res) => {
+    const db = client.db('heroku_1lzmbqql');
+    console.log(db);
+    const types = ['user_change', 'team_join'];
+    let objres;
+    try {
+      types.map(type => {
+        const results = await db.collection(type).find({});
+        objres.concat(results);
+      });
+      res.json(objres);
+    } catch(e) {
+      res.status(502).send({ error: e });
+    }
+    return client.close();
   }
 };
