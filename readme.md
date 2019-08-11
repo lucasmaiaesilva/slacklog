@@ -1,8 +1,8 @@
-#SlackLog
+# SlackLog
 
 Slack Log is a log system that uses a Slack API to show user iteractions on specific slack workspace.
 
-##Getting Started
+## Getting Started
 
 To run the product you'll need the mongoDB database, to see instructions click on these links below:
 
@@ -16,7 +16,7 @@ NodeJs:
 
 * [nodejs](nodejs.org)
 
-###Slack Permissions
+### Slack Permissions
 
 You also have to create an app on Slack and config the permissions on Slack to `user_change` and `team_join` events.
 
