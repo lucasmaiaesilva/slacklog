@@ -32,11 +32,21 @@ module.exports = {
     );
 
     const db = client.db('heroku_1lzmbqql');
-    console.log(db);
     const types = ['user_change', 'team_join'];
-    let objres = [];
-    db.collection('user_change').find({})
-      .then(res => console.log(res));
+    const result = await Promise.all(types.map(async (eventName) => {
+      const data = await getLogsByCollection(db, eventName);
+      return {
+        event: eventName,
+        data
+      };
+    }));
+    res.json(result);
     return client.close();
   }
 };
+
+function getLogsByCollection(db,  collectionName) {
+  return db.collection(collectionName)
+    .find({})
+    .toArray();
+}
