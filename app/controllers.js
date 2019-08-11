@@ -1,7 +1,13 @@
 const mongodb = require('mongodb').MongoClient;
 module.exports = {
   showHome: (req, res) => {
-    res.send('hello world!!!');
+    const mainPage = `
+      <p>The application is running! Please access
+        <a href="/logs">/logs</a>
+        to see the logs list
+      </p>
+    `;
+    res.send();
   },
   handleLogs: async (req, res) => {
     if (req.body.challenge) {
