@@ -18,8 +18,7 @@ module.exports = {
       { useNewUrlParser: true }
     );
 
-    const db = client.db('heroku_1lzmbqql');
-    console.log(db);
+    const db = client.db(process.env.DB_NAME);
     const { type } = req.body.event;
     try {
       await db.createCollection(type);
@@ -36,8 +35,8 @@ module.exports = {
       process.env.DB_URI,
       { useNewUrlParser: true }
     );
+    const db = client.db(process.env.DB_NAME);
 
-    const db = client.db('heroku_1lzmbqql');
     const types = ['user_change', 'team_join'];
     const result = await Promise.all(types.map(async (eventName) => {
       const data = await getLogsByCollection(db, eventName);
