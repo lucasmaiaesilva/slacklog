@@ -7,7 +7,7 @@ module.exports = {
         to see the logs list
       </p>
     `;
-    res.send();
+    res.send(mainPage);
   },
   handleLogs: async (req, res) => {
     if (req.body.challenge) {
